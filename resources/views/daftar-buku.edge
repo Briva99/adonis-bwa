@@ -1,0 +1,38 @@
+@layout('master')
+
+@section('content')
+<h1>Daftar Buku</h1>
+@if(flashMessage('notification'))
+  <div class="alert alert-success"> 
+      {{flashMessage('notification')}}
+
+  </div>
+  @endif
+              <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Judul</th>
+                      <th scope="col">Tahun Terbit</th>
+                      <th scope="col">Deskripsi</th>
+                      <th scope="col">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{--  looping pemanggilan buku dari database  --}}
+                    @each(data1 in buku_baru)
+                      <tr>
+                        <th scope="row">{{$loop.index + 1}}</th>
+                        <td>{{ data1.judul }}</td>
+                        <td>{{ data1.tahun }}</td>
+                        <td>{{ data1.deskripsi }}</td>
+                        <td>
+                          <a href="edit/{{ data1.id}}" class="btn btn-primary">Edit</a>
+                          <a href="delete/{{ data1.id}}" class="btn btn-danger">Hapus</a>
+                        </td>
+                      </tr>
+                    @endeach
+                  </tbody>
+                </table>
+
+@endsection
